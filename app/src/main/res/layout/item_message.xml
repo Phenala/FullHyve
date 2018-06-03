@@ -61,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="time"
+                    android:textSize="10dp"
                     android:textAlignment="textEnd"
                     android:textColor="@color/textFaded" />
             </LinearLayout>

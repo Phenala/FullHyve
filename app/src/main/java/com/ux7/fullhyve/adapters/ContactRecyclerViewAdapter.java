@@ -52,14 +52,19 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    Intent intent = new Intent(mListener.getHomeContext(), ContactView.class);
-                    intent.putExtra("name", "Eliza Woods");
-                    intent.putExtra("image", "lol");
-                    mListener.onStartNewActivity(intent);
+                    openMessages(holder.mContact);
                 }
             }
         });
     }
+
+    public void openMessages(ListContact contact) {
+        Intent intent = new Intent(mListener.getHomeContext(), ContactView.class);
+        intent.putExtra("name", contact.name);
+        intent.putExtra("image", contact.image);
+        mListener.onStartNewActivity(intent);
+    }
+
 
     @Override
     public int getItemCount() {

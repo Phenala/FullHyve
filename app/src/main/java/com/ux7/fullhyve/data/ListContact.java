@@ -11,7 +11,7 @@ public class ListContact {
 
     public int id = 12;
     public String image = "draw";
-    public String name = "Uzi";
+    public String name = "Rod Rodder";
     public String lastMessage = "Gangsta to the core.";
     public int newMessages = 2;
 

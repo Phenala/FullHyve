@@ -20,13 +20,20 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.ux7.fullhyve.R;
 import com.ux7.fullhyve.data.ListContact;
+import com.ux7.fullhyve.data.ListTeam;
 import com.ux7.fullhyve.fragments.ContactsListFragment;
+import com.ux7.fullhyve.fragments.TeamsListFragment;
 import com.ux7.fullhyve.interfaces.OnHomeInteractionListener;
 
 public class HomeView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnHomeInteractionListener {
 
     ContactsListFragment contactsListFragment = new ContactsListFragment();
+    TeamsListFragment teamsListFragment = new TeamsListFragment();
+
+    FloatingActionButton fab;
+    View.OnClickListener addTeam;
+    View.OnClickListener addProject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +42,7 @@ public class HomeView extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        initializeFloatingActionButton();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,8 +106,13 @@ public class HomeView extends AppCompatActivity
             setTitle("Notifications");
         } else if (id == R.id.nav_chat) {
             setTitle("Chat");
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contactsListFragment).commit();
+            fab.hide();
         } else if (id == R.id.nav_teams) {
             setTitle("Teams");
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, teamsListFragment).commit();
+            fab.show();
+            fab.setOnClickListener(addTeam);
         } else if (id == R.id.nav_projects) {
             setTitle("Projects");
         } else if (id == R.id.nav_log_out) {
@@ -119,8 +124,39 @@ public class HomeView extends AppCompatActivity
         return true;
     }
 
+
+    public void initializeFloatingActionButton() {
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        addTeam = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open add team
+            }
+        };
+
+        addProject = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open add project
+            }
+        };
+    }
+
     @Override
-    public void onListFragmentInteraction(ListContact item) {
+    public void onContactListFragmentInteraction(ListContact item) {
+
+    }
+
+    public void onTeamListFragmentInteraction(ListTeam team) {
 
     }
 
