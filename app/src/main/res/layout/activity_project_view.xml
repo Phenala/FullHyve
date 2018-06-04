@@ -17,28 +17,21 @@
             android:layout_height="match_parent">
 
             <android.support.design.widget.TabLayout
-                android:id="@+id/teamTabs"
+                android:id="@+id/project_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabMinWidth="40dp"
-                app:tabMode="scrollable">
+                app:tabMinWidth="40dp">
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="Announcements" />
+                    android:text="Task sets" />
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Members" />
-
-                <android.support.design.widget.TabItem
-                    android:id="@+id/tabItem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Projects" />
+                    android:text="Contributors" />
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
@@ -48,7 +41,7 @@
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/teamFragmentContainer"
+            android:id="@+id/project_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="com.ux7.fullhyve.activities.TeamView"

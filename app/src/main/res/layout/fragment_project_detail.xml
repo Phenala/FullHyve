@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ux7.fullhyve.fragments.TeamDetailFragment">
+    tools:context="com.ux7.fullhyve.fragments.ProjectDetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/team_image"
+            android:id="@+id/project_image"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
@@ -21,7 +21,7 @@
             android:background="@mipmap/pp1_round" />
 
         <TextView
-            android:id="@+id/team_name"
+            android:id="@+id/project_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="App Dev"
@@ -29,7 +29,7 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/team_focus"
+            android:id="@+id/project_focus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cloud Computing"
@@ -38,7 +38,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/team_description"
+            android:id="@+id/project_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -47,11 +47,11 @@
             android:textColor="@color/textLight" />
 
         <TextView
-            android:id="@+id/team_member_count"
+            android:id="@+id/project_member_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="team"
+            android:text="project"
             android:textAlignment="textEnd"
             android:textColor="@color/textLight" />
     </LinearLayout>

@@ -1,6 +1,7 @@
 package com.ux7.fullhyve.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -67,7 +68,11 @@ public class MemberFragment extends Fragment {
         Context context = getActivity();
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.member_list);
-        recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+//        Drawable divider = getResources().getDrawable(R.drawable.ic_divider);
+//        divider.setTint();
+//        dividerItemDecoration.setDrawable();
+        recyclerView.addItemDecoration(dividerItemDecoration);
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         } else {

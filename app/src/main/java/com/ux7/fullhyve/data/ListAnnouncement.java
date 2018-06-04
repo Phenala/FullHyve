@@ -1,10 +1,12 @@
 package com.ux7.fullhyve.data;
 
+import java.io.Serializable;
+
 /**
  * Created by hp on 6/3/2018.
  */
 
-public class ListAnnouncement {
+public class ListAnnouncement implements Serializable {
 
     public String id = "344";
     public String message = "This is a warning to the coalition of hackers attempting to breach this secure and wooden system. No remissions will be tolerated.";

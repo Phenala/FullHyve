@@ -20,8 +20,10 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.ux7.fullhyve.R;
 import com.ux7.fullhyve.data.ListContact;
+import com.ux7.fullhyve.data.ListProject;
 import com.ux7.fullhyve.data.ListTeam;
 import com.ux7.fullhyve.fragments.ContactsListFragment;
+import com.ux7.fullhyve.fragments.ProjectsListFragment;
 import com.ux7.fullhyve.fragments.TeamsListFragment;
 import com.ux7.fullhyve.interfaces.OnHomeInteractionListener;
 
@@ -30,6 +32,7 @@ public class HomeView extends AppCompatActivity
 
     ContactsListFragment contactsListFragment = new ContactsListFragment();
     TeamsListFragment teamsListFragment = new TeamsListFragment();
+    ProjectsListFragment projectsListFragment = new ProjectsListFragment();
 
     FloatingActionButton fab;
     View.OnClickListener addTeam;
@@ -43,6 +46,7 @@ public class HomeView extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         initializeFloatingActionButton();
+        initializeAdders();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -95,6 +99,23 @@ public class HomeView extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public void initializeAdders() {
+        addTeam = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), NewTeam.class);
+                startActivity(intent);
+            }
+        };
+        addProject = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), NewProject.class);
+                startActivity(intent);
+            }
+        };
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -115,6 +136,9 @@ public class HomeView extends AppCompatActivity
             fab.setOnClickListener(addTeam);
         } else if (id == R.id.nav_projects) {
             setTitle("Projects");
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, projectsListFragment).commit();
+            fab.show();
+            fab.setOnClickListener(addProject);
         } else if (id == R.id.nav_log_out) {
 
         }
@@ -156,7 +180,13 @@ public class HomeView extends AppCompatActivity
 
     }
 
+    @Override
     public void onTeamListFragmentInteraction(ListTeam team) {
+
+    }
+
+    @Override
+    public void onProjectListFragmentInteraction(ListProject project) {
 
     }
 

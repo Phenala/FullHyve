@@ -1,14 +1,12 @@
 package com.ux7.fullhyve.activities;
 
 
-import android.app.Activity;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -17,20 +15,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
 import com.ux7.fullhyve.R;
-import com.ux7.fullhyve.data.ListTeam;
+import com.ux7.fullhyve.data.ListProject;
 import com.ux7.fullhyve.fragments.AnnouncementsFragment;
 import com.ux7.fullhyve.fragments.MemberFragment;
-import com.ux7.fullhyve.fragments.TeamDetailFragment;
+import com.ux7.fullhyve.fragments.ProjectDetailFragment;
 import com.ux7.fullhyve.util.ActionBarTarget;
 import com.ux7.fullhyve.util.CircleTransform;
+import com.ux7.fullhyve.util.ThumbnailTransform;
 
-public class TeamView extends AppCompatActivity {
+public class ProjectView extends AppCompatActivity {
 
-    ListTeam team = new ListTeam();
+    ListProject project = new ListProject();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -50,43 +47,44 @@ public class TeamView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_view);
+        setContentView(R.layout.activity_project_view);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
-        buildTeam();
+        buildProject();
         buildActionBar();
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.teamFragmentContainer);
+        mViewPager = (ViewPager) findViewById(R.id.project_fragment_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.teamTabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.project_tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
     }
 
-    public void buildTeam() {
+    public void buildProject() {
 
-        team.name = getIntent().getStringExtra("name");
-        team.image = getIntent().getStringExtra("image");
+        project.name = getIntent().getStringExtra("name");
+        project.image = getIntent().getStringExtra("image");
 
     }
 
     public void buildActionBar() {
         ActionBar actionBar = getSupportActionBar();
-        setTitle("   " + team.name);
+        setTitle("   " + project.name);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
         Picasso.with(this)
-                .load(team.image)
+                .load(project.image)
                 .transform(new CircleTransform())
+                .resize(64,64)
                 .into(new ActionBarTarget(getResources(), actionBar));
     }
 
@@ -94,7 +92,7 @@ public class TeamView extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_team_view, menu);
+        getMenuInflater().inflate(R.menu.menu_project_view, menu);
         return true;
     }
 
@@ -147,7 +145,7 @@ public class TeamView extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_team_view, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_project_view, container, false);
             return rootView;
         }
     }
@@ -168,17 +166,14 @@ public class TeamView extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    AnnouncementsFragment teamAnnounce = new AnnouncementsFragment();
-                    return teamAnnounce;
+                    AnnouncementsFragment projectAnnounce = new AnnouncementsFragment();
+                    return projectAnnounce;
                 case 1:
-                    MemberFragment teamMembers = new MemberFragment();
-                    return teamMembers;
+                    MemberFragment projectMembers = new MemberFragment();
+                    return projectMembers;
                 case 2:
-                    MemberFragment teamProjects = new MemberFragment();
-                    return teamProjects;
-                case 3:
-                    TeamDetailFragment teamDetails = new TeamDetailFragment();
-                    return teamDetails;
+                    ProjectDetailFragment projectDetails = new ProjectDetailFragment();
+                    return projectDetails;
             }
             return new AnnouncementsFragment();
         }
@@ -186,7 +181,7 @@ public class TeamView extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 4;
+            return 3;
         }
 
         @Override

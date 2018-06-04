@@ -24,7 +24,11 @@
         <activity android:name=".activities.ContactView" />
         <activity
             android:name=".activities.TeamView"
-            android:label="@string/title_activity_team_view"></activity>
+            android:label="@string/title_activity_team_view" />
+        <activity android:name=".activities.ProjectView" />
+        <activity android:name=".activities.NewTeam" />
+        <activity android:name=".activities.NewProject" />
+        <activity android:name=".activities.AnnouncementView"></activity>
     </application>
 
 </manifest>

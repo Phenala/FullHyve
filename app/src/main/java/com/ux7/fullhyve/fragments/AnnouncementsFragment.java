@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.ux7.fullhyve.R;
 import com.ux7.fullhyve.adapters.AnnouncementRecyclerViewAdapter;
 import com.ux7.fullhyve.data.ListAnnouncement;
+import com.ux7.fullhyve.data.ListTeam;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,7 @@ public class AnnouncementsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     View fragmentView;
+    public ListTeam team;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,7 +76,7 @@ public class AnnouncementsFragment extends Fragment {
             nlist.add(l);
         }
 
-        recyclerView.setAdapter(new AnnouncementRecyclerViewAdapter(nlist));
+        recyclerView.setAdapter(new AnnouncementRecyclerViewAdapter(nlist, team.image));
         recyclerView.getLayoutManager().scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
     }
 

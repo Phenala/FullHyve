@@ -6,4 +6,54 @@
     android:layout_height="match_parent"
     tools:context="com.ux7.fullhyve.activities.AnnouncementView">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/callout_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@color/messageReceived"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:id="@+id/announcer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Guy Charuchas" />
+
+            <TextView
+                android:id="@+id/announcement_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingVertical="8dp"
+                android:text="TextView"
+                android:textColor="@color/textdark" />
+
+            <TextView
+                android:id="@+id/announcement_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="14:21 AM      14 replies"
+                android:textAlignment="textEnd"
+                android:textColor="@color/textFaded"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/reply_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            tools:listitem="@layout/item_reply" />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

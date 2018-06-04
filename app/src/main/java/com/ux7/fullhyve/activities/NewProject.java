@@ -1,18 +1,18 @@
 package com.ux7.fullhyve.activities;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.ux7.fullhyve.R;
 
-public class NewTeam extends AppCompatActivity {
+public class NewProject extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_team);
+        setContentView(R.layout.activity_new_project);
 
         buildActionBar();
     }
@@ -37,7 +37,7 @@ public class NewTeam extends AppCompatActivity {
 
     public void buildActionBar() {
         ActionBar actionBar = getSupportActionBar();
-        setTitle("New Team");
+        setTitle("New Project");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
     }

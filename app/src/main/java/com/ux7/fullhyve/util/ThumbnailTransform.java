@@ -9,7 +9,9 @@ import android.media.ThumbnailUtils;
 
 import com.squareup.picasso.Transformation;
 
-public class CircleTransform implements Transformation {
+public class ThumbnailTransform implements Transformation {
+
+    int thumbnailSize = 64;
 
     @Override
     public Bitmap transform(Bitmap source) {
@@ -18,7 +20,9 @@ public class CircleTransform implements Transformation {
         int x = (source.getWidth() - size) / 2;
         int y = (source.getHeight() - size) / 2;
 
-        Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+        Bitmap squaredBitmap = ThumbnailUtils.extractThumbnail(Bitmap.createBitmap(source, x, y, size, size), thumbnailSize, thumbnailSize);
+        size = thumbnailSize;
+
         if (squaredBitmap != source) {
             source.recycle();
         }

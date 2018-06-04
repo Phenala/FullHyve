@@ -2,7 +2,6 @@ package com.ux7.fullhyve.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,11 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.ux7.fullhyve.R;
-import com.ux7.fullhyve.activities.TeamView;
-import com.ux7.fullhyve.data.ListTeam;
+import com.ux7.fullhyve.activities.ProjectView;
+import com.ux7.fullhyve.data.ListProject;
 import com.ux7.fullhyve.interfaces.OnHomeInteractionListener;
 import com.ux7.fullhyve.util.CircleTransform;
+import com.ux7.fullhyve.util.ThumbnailTransform;
 
 import java.util.List;
 
@@ -24,30 +24,30 @@ import java.util.List;
  * specified {@link OnHomeInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class TeamsRecyclerViewAdapter extends RecyclerView.Adapter<TeamsRecyclerViewAdapter.ViewHolder> {
+public class ProjectsRecyclerViewAdapter extends RecyclerView.Adapter<ProjectsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<ListTeam> mTeams;
+    private final List<ListProject> mProjects;
     private final OnHomeInteractionListener mListener;
 
-    public TeamsRecyclerViewAdapter(List<ListTeam> items, OnHomeInteractionListener listener) {
-        mTeams = items;
+    public ProjectsRecyclerViewAdapter(List<ListProject> items, OnHomeInteractionListener listener) {
+        mProjects = items;
         mListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_team, parent, false);
+                .inflate(R.layout.fragment_project, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.mTeam = mTeams.get(position);
-        holder.mNameView.setText(mTeams.get(position).name);
+        holder.mProject = mProjects.get(position);
+        holder.mNameView.setText(mProjects.get(position).name);
 
         Picasso.with(holder.mView.getContext())
-                .load(holder.mTeam.image)
+                .load(holder.mProject.image)
                 .transform(new CircleTransform())
                 .into(holder.mPicture);
 
@@ -55,39 +55,39 @@ public class TeamsRecyclerViewAdapter extends RecyclerView.Adapter<TeamsRecycler
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    goToTeam(holder.mView.getContext(), holder.mTeam);
-                    mListener.onTeamListFragmentInteraction(holder.mTeam);
+                    goToProject(holder.mView.getContext(), holder.mProject);
+                    mListener.onProjectListFragmentInteraction(holder.mProject);
                     notifyItemChanged(position);
                 }
             }
         });
     }
 
-    public void goToTeam(Context context, ListTeam team) {
+    public void goToProject(Context context, ListProject project) {
 
-        Intent intent = new Intent(context, TeamView.class);
-        intent.putExtra("name", team.name);
-        intent.putExtra("image", team.image);
+        Intent intent = new Intent(context, ProjectView.class);
+        intent.putExtra("name", project.name);
+        intent.putExtra("image", project.image);
         context.startActivity(intent);
 
     }
 
     @Override
     public int getItemCount() {
-        return mTeams.size();
+        return mProjects.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final ImageView mPicture;
         public final TextView mNameView;
-        public ListTeam mTeam;
+        public ListProject mProject;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mPicture = (ImageView) view.findViewById(R.id.teamPicture);
-            mNameView = (TextView) view.findViewById(R.id.teamName);
+            mPicture = (ImageView) view.findViewById(R.id.projectPicture);
+            mNameView = (TextView) view.findViewById(R.id.projectName);
         }
 
         @Override

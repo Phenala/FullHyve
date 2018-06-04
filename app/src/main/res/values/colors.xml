@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#232323</color>
     <color name="colorAccent">#ff9720</color>
 
+    <color name="colorBackground">#303030</color>
+
     <color name="messageReceived">#838383</color>
     <color name="messageSent">#202020</color>
 

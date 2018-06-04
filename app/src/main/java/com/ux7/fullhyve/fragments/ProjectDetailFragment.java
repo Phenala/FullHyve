@@ -1,9 +1,9 @@
 package com.ux7.fullhyve.fragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +12,18 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.ux7.fullhyve.R;
-import com.ux7.fullhyve.data.TeamDetail;
+import com.ux7.fullhyve.data.ProjectDetail;
 import com.ux7.fullhyve.util.CircleTransform;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TeamDetailFragment.OnFragmentInteractionListener} interface
+ * {@link ProjectDetailFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TeamDetailFragment#newInstance} factory method to
+ * Use the {@link ProjectDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TeamDetailFragment extends Fragment {
+public class ProjectDetailFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,7 +37,7 @@ public class TeamDetailFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TeamDetailFragment() {
+    public ProjectDetailFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +47,11 @@ public class TeamDetailFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TeamDetailFragment.
+     * @return A new instance of fragment ProjectDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TeamDetailFragment newInstance(String param1, String param2) {
-        TeamDetailFragment fragment = new TeamDetailFragment();
+    public static ProjectDetailFragment newInstance(String param1, String param2) {
+        ProjectDetailFragment fragment = new ProjectDetailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,25 +72,25 @@ public class TeamDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_team_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_project_detail, container, false);
 
-        buildTeamDetail();
+        buildProjectDetail();
 
         return rootView;
     }
 
-    public void buildTeamDetail() {
+    public void buildProjectDetail() {
 
-        TeamDetail teamDetail = new TeamDetail();
-        ((TextView)rootView.findViewById(R.id.team_name)).setText(teamDetail.name);
-        ((TextView)rootView.findViewById(R.id.team_focus)).setText(teamDetail.focus);
-        ((TextView)rootView.findViewById(R.id.team_description)).setText(teamDetail.description);
-        ((TextView)rootView.findViewById(R.id.team_member_count)).setText(teamDetail.members + " members");
-        ImageView teamImageView = ((ImageView)rootView.findViewById(R.id.team_image));
+        ProjectDetail projectDetail = new ProjectDetail();
+        ((TextView)rootView.findViewById(R.id.project_name)).setText(projectDetail.name);
+        ((TextView)rootView.findViewById(R.id.project_focus)).setText(projectDetail.focus);
+        ((TextView)rootView.findViewById(R.id.project_description)).setText(projectDetail.description);
+        ((TextView)rootView.findViewById(R.id.project_member_count)).setText(projectDetail.contributors + " contributors");
+        ImageView projectImageView = ((ImageView)rootView.findViewById(R.id.project_image));
         Picasso.with(getActivity())
-                .load(teamDetail.image)
+                .load(projectDetail.image)
                 .transform(new CircleTransform())
-                .into(teamImageView);
+                .into(projectImageView);
 
     }
 

@@ -27,6 +27,7 @@ import com.ux7.fullhyve.fragments.MemberFragment;
 import com.ux7.fullhyve.fragments.TeamDetailFragment;
 import com.ux7.fullhyve.util.ActionBarTarget;
 import com.ux7.fullhyve.util.CircleTransform;
+import com.ux7.fullhyve.util.ThumbnailTransform;
 
 public class TeamView extends AppCompatActivity {
 
@@ -87,6 +88,7 @@ public class TeamView extends AppCompatActivity {
         Picasso.with(this)
                 .load(team.image)
                 .transform(new CircleTransform())
+                .resize(64,64)
                 .into(new ActionBarTarget(getResources(), actionBar));
     }
 
@@ -169,6 +171,7 @@ public class TeamView extends AppCompatActivity {
             switch (position) {
                 case 0:
                     AnnouncementsFragment teamAnnounce = new AnnouncementsFragment();
+                    teamAnnounce.team = team;
                     return teamAnnounce;
                 case 1:
                     MemberFragment teamMembers = new MemberFragment();

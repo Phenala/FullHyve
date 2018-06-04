@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.ux7.fullhyve.R;
 import com.ux7.fullhyve.activities.TeamView;
 import com.ux7.fullhyve.data.ListTeam;
 import com.ux7.fullhyve.interfaces.OnHomeInteractionListener;
+import com.ux7.fullhyve.util.CircleTransform;
 
 import java.util.List;
 
@@ -43,6 +45,11 @@ public class TeamsRecyclerViewAdapter extends RecyclerView.Adapter<TeamsRecycler
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mTeam = mTeams.get(position);
         holder.mNameView.setText(mTeams.get(position).name);
+
+        Picasso.with(holder.mView.getContext())
+                .load(holder.mTeam.image)
+                .transform(new CircleTransform())
+                .into(holder.mPicture);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

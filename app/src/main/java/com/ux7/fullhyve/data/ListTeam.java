@@ -8,7 +8,7 @@ public class ListTeam {
 
     public int id = 4;
     public String name = "Low Town Locos";
-    public String image = "image0";
+    public String image = "http://www.artisticquiltdesign.com/wp-content/uploads/cool-gaming-logos-gruppr-logo-edwin-de-jongh-dribbble.png";
     public boolean member = false;
 
 }
