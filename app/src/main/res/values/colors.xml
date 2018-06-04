@@ -10,4 +10,5 @@
     <color name="textLight">#848484</color>
     <color name="textFaded">#393939</color>
     <color name="textdark">#000000</color>
+    <color name="tranparent">#00000000</color>
 </resources>

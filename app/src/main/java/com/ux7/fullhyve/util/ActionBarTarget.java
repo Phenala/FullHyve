@@ -1,6 +1,6 @@
 package com.ux7.fullhyve.util;
 
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -41,5 +41,4 @@ public class ActionBarTarget implements Target {
     public void onPrepareLoad(Drawable placeHolderDrawable)
     {
     }
-});
 }

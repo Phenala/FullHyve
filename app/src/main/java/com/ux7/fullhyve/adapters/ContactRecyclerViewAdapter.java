@@ -1,5 +1,6 @@
 package com.ux7.fullhyve.adapters;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -7,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.ux7.fullhyve.R;
 import com.ux7.fullhyve.activities.ContactView;
 import com.ux7.fullhyve.data.ListContact;
 import com.ux7.fullhyve.interfaces.OnHomeInteractionListener;
+import com.ux7.fullhyve.util.CircleTransform;
 
 import java.util.List;
 
@@ -40,11 +44,12 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mContact = mContacts.get(position);
-        holder.mName.setText(mContacts.get(position).name);
-        holder.mMessage.setText(mContacts.get(position).lastMessage);
-        holder.mMessageCount.setText(String.valueOf(mContacts.get(position).newMessages));
+        holder.mName.setText(holder.mContact.name);
+        holder.mMessage.setText(holder.mContact.lastMessage);
+        holder.mMessageCount.setText(String.valueOf(holder.mContact.newMessages));
+        Picasso.with(holder.itemView.getContext()).load(holder.mContact.image).transform(new CircleTransform()).into(holder.mPicture);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +58,7 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     openMessages(holder.mContact);
+                    notifyItemChanged(position);
                 }
             }
         });
