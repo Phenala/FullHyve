@@ -14,6 +14,19 @@ public class ListAnnouncement implements Serializable {
     public String senderImage = "http://0.gravatar.com/avatar/c77b7988df1396d40ed4a62be4e55565?s=64&d=mm&r=g";
     public String senderName = "Watonica Paddymont Junior";
     public String sentTime = "14:32 PM";
+    public int replies = 14;
     public boolean sent = false;
+
+    public ListReply getAnnouncementInReplyForm() {
+        ListReply reply = new ListReply();
+        reply.pAnnouncement = true;
+        reply.id = id;
+        reply.senderName = senderName;
+        reply.senderImage = senderImage;
+        reply.time = sentTime;
+        reply.reply = message;
+
+        return reply;
+    }
 
 }

@@ -11,49 +11,44 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/callout_body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:background="@color/messageReceived"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="8dp">
-
-            <TextView
-                android:id="@+id/announcer_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Guy Charuchas" />
-
-            <TextView
-                android:id="@+id/announcement_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingVertical="8dp"
-                android:text="TextView"
-                android:textColor="@color/textdark" />
-
-            <TextView
-                android:id="@+id/announcement_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="14:21 AM      14 replies"
-                android:textAlignment="textEnd"
-                android:textColor="@color/textFaded"
-                android:textSize="10dp" />
-        </LinearLayout>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/reply_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:listitem="@layout/item_reply">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0"
-            tools:listitem="@layout/item_reply" />
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/reply_to_send"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Reply"
+                android:inputType="textMultiLine"
+                android:paddingHorizontal="8dp" />
+
+            <ImageButton
+                android:id="@+id/reply_send_button"
+                android:layout_width="52dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/tranparent"
+                android:elevation="0dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/colorAccent"
+                app:srcCompat="@drawable/ic_send_icon" />
+        </LinearLayout>
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

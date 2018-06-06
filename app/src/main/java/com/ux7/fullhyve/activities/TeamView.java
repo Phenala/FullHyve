@@ -24,7 +24,9 @@ import com.ux7.fullhyve.R;
 import com.ux7.fullhyve.data.ListTeam;
 import com.ux7.fullhyve.fragments.AnnouncementsFragment;
 import com.ux7.fullhyve.fragments.MemberFragment;
+import com.ux7.fullhyve.fragments.ProjectsListFragment;
 import com.ux7.fullhyve.fragments.TeamDetailFragment;
+import com.ux7.fullhyve.fragments.TeamProjectsFragment;
 import com.ux7.fullhyve.util.ActionBarTarget;
 import com.ux7.fullhyve.util.CircleTransform;
 import com.ux7.fullhyve.util.ThumbnailTransform;
@@ -177,8 +179,8 @@ public class TeamView extends AppCompatActivity {
                     MemberFragment teamMembers = new MemberFragment();
                     return teamMembers;
                 case 2:
-                    MemberFragment teamProjects = new MemberFragment();
-                    return teamProjects;
+                    TeamProjectsFragment projects = new TeamProjectsFragment();
+                    return projects;
                 case 3:
                     TeamDetailFragment teamDetails = new TeamDetailFragment();
                     return teamDetails;

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,18 +25,18 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MemberRecyclerViewAdapter extends RecyclerView.Adapter<MemberRecyclerViewAdapter.ViewHolder> {
+public class AddMemberRecyclerViewAdapter extends RecyclerView.Adapter<AddMemberRecyclerViewAdapter.ViewHolder> {
 
     private final List<ListMember> mMembers;
 
-    public MemberRecyclerViewAdapter(List<ListMember> items) {
+    public AddMemberRecyclerViewAdapter(List<ListMember> items) {
         mMembers = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_member, parent, false);
+                .inflate(R.layout.item_add_member, parent, false);
         return new ViewHolder(view);
     }
 
@@ -47,21 +48,26 @@ public class MemberRecyclerViewAdapter extends RecyclerView.Adapter<MemberRecycl
 
         final Context context = holder.mView.getContext();
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.mView.setOnClickListener(
+                new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 // Notify the active callbacks interface (the activity, if the
                 // fragment is attached to one) that an item has been selected.
+
 
                 Intent intent = new Intent(context, UserView.class);
                 UserDetail user = new UserDetail();
                 intent.putExtra("user", user);
                 context.startActivity(intent);
 
+
                 // mListener.onListFragmentInteraction(holder.mMember);
                 notifyItemChanged(position);
 
             }
+
         });
     }
 
@@ -74,6 +80,7 @@ public class MemberRecyclerViewAdapter extends RecyclerView.Adapter<MemberRecycl
         public final View mView;
         public final ImageView mMemberPictureView;
         public final TextView mMemberNameView;
+        public final CheckBox mAddMember;
         public ListMember mMember;
 
         public ViewHolder(View view) {
@@ -81,6 +88,7 @@ public class MemberRecyclerViewAdapter extends RecyclerView.Adapter<MemberRecycl
             mView = view;
             mMemberPictureView = (ImageView) view.findViewById(R.id.member_picture);
             mMemberNameView = (TextView) view.findViewById(R.id.member_name);
+            mAddMember = (CheckBox) view.findViewById(R.id.add_member_check);
         }
 
         @Override

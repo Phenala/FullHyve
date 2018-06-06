@@ -8,7 +8,7 @@ public class ListProject {
 
     public int id = 4;
     public String name = "Poltergeist";
-    public String image = "https://orig00.deviantart.net/262f/f/2015/184/1/4/blood_hand_logo_by_irianwhitefox-d8wp6qd.jpg";
+    public String image = "https://demo.accesspressthemes.com/wordpress-plugins/smart-logo-showcase/wp-content/uploads/2016/12/spartan-security.jpg";
     public boolean contributor = false;
 
 }

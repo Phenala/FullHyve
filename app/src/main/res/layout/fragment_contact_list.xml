@@ -9,6 +9,6 @@
     android:scrollY="0dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.ux7.fullhyve.fragments.ContactsListFragment"
-    tools:listitem="@layout/fragment_contact" >
+    tools:listitem="@layout/item_contact" >
 
 </android.support.v7.widget.RecyclerView>

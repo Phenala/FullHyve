@@ -15,7 +15,6 @@ import com.ux7.fullhyve.activities.ProjectView;
 import com.ux7.fullhyve.data.ListProject;
 import com.ux7.fullhyve.interfaces.OnHomeInteractionListener;
 import com.ux7.fullhyve.util.CircleTransform;
-import com.ux7.fullhyve.util.ThumbnailTransform;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class ProjectsRecyclerViewAdapter extends RecyclerView.Adapter<ProjectsRe
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_project, parent, false);
+                .inflate(R.layout.item_project, parent, false);
         return new ViewHolder(view);
     }
 

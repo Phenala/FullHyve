@@ -34,6 +34,10 @@ public class AnnouncementView extends AppCompatActivity {
         buildReplies();
     }
 
+    public void buildAnnouncement() {
+
+    }
+
     public void buildReplies() {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.reply_list);
@@ -41,6 +45,7 @@ public class AnnouncementView extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         ArrayList<ListReply> nlist = new ArrayList<>();
+        nlist.add((new ListAnnouncement()).getAnnouncementInReplyForm());
         //nlist.add(ListMessage.getSpinnerValue());
         for (int i = 0; i < 20; i++) {
             ListReply l = new ListReply();
@@ -48,7 +53,7 @@ public class AnnouncementView extends AppCompatActivity {
         }
 
         recyclerView.setAdapter(new ReplyRecyclerViewAdapter(nlist));
-        recyclerView.getLayoutManager().scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+//        recyclerView.getLayoutManager().scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
     }
 
     @Override

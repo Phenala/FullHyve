@@ -1,6 +1,7 @@
 package com.ux7.fullhyve.adapters;
 
 import android.content.Intent;
+import android.support.annotation.Px;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,16 +44,24 @@ public class ReplyRecyclerViewAdapter extends RecyclerView.Adapter<ReplyRecycler
         holder.mReplyContent.setText(holder.mReply.reply);
         holder.mReplyTime.setText(holder.mReply.time);
         holder.mSenderName.setText(holder.mReply.senderName);
+        Picasso.with(holder.mView.getContext())
+                .load(holder.mReply.senderImage)
+                .transform(new CircleTransform())
+                .into(holder.mSenderImage);
+
+        LinearLayout body = (LinearLayout)holder.mView.findViewById(R.id.reply_body);
+        int normalPadding = body.getPaddingBottom();
 
         if (holder.mReply.pAnnouncement) {
 
-            ((LinearLayout)holder.mView.findViewById(R.id.reply_body)
+            body.setBackgroundColor(holder.mView.getContext().getResources().getColor(R.color.messageReceived));
+            body.setPadding(body.getPaddingLeft(), body.getPaddingTop(), body.getPaddingRight(), normalPadding * 2);
+            holder.mReplyContent.setTextColor(holder.mView.getContext().getResources().getColor(R.color.textdark));
 
         } else {
-            Picasso.with(holder.mView.getContext())
-                    .load(holder.mReply.senderImage)
-                    .transform(new CircleTransform())
-                    .into(holder.mSenderImage);
+            body.setBackgroundColor(holder.mView.getContext().getResources().getColor(R.color.colorBackground));
+            holder.mReplyContent.setTextColor(holder.mView.getContext().getResources().getColor(R.color.textLight));
+            body.setPadding(body.getPaddingLeft(), body.getPaddingTop(), body.getPaddingRight(), normalPadding );
         }
 
 

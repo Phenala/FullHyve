@@ -8,7 +8,7 @@ public class ProjectDetail {
 
     public String id = "32545";
     public String name = "Poltergeist";
-    public String image = "https://orig00.deviantart.net/262f/f/2015/184/1/4/blood_hand_logo_by_irianwhitefox-d8wp6qd.jpg";
+    public String image = "https://demo.accesspressthemes.com/wordpress-plugins/smart-logo-showcase/wp-content/uploads/2016/12/spartan-security.jpg";
     public String focus = "Hologram Research";
     public String description = "A highly misunderstood martyr does his best to fight the most of the enemy combatants all the while carrying a pistol in the trunk";
     public int contributors = 74;

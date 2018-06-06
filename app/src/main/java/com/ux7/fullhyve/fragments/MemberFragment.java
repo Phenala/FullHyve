@@ -1,9 +1,12 @@
 package com.ux7.fullhyve.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,30 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ux7.fullhyve.R;
+import com.ux7.fullhyve.activities.AddMember;
 import com.ux7.fullhyve.adapters.MemberRecyclerViewAdapter;
 import com.ux7.fullhyve.data.ListContact;
 import com.ux7.fullhyve.data.ListMember;
 
 import java.util.ArrayList;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
+
 public class MemberFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    View view;
+    Context context;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public MemberFragment() {
     }
 
@@ -45,7 +37,6 @@ public class MemberFragment extends Fragment {
     public static MemberFragment newInstance(int columnCount) {
         MemberFragment fragment = new MemberFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,57 +45,72 @@ public class MemberFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_member_list, container, false);
+        view = inflater.inflate(R.layout.fragment_member_list, container, false);
 
-        // Set the adapter
-        Context context = getActivity();
+        context = getActivity();
+
+        initializeRecyclerView();
+        initializeFloatingActionButton();
+
+        return view;
+    }
+
+    public void initializeRecyclerView() {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.member_list);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
-//        Drawable divider = getResources().getDrawable(R.drawable.ic_divider);
-//        divider.setTint();
-//        dividerItemDecoration.setDrawable();
         recyclerView.addItemDecoration(dividerItemDecoration);
-        if (mColumnCount <= 1) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-        }
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
 
         ArrayList<ListMember> items = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             items.add(new ListMember());
         }
-        recyclerView.setAdapter(new MemberRecyclerViewAdapter(items, mListener));
-
-        return view;
+        recyclerView.setAdapter(new MemberRecyclerViewAdapter(items));
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
     }
+
+
+    public void initializeFloatingActionButton() {
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.add_member_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, AddMember.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+    }
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**

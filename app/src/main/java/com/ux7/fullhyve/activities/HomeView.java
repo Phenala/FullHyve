@@ -159,20 +159,7 @@ public class HomeView extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
-        addTeam = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //open add team
-            }
-        };
-
-        addProject = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //open add project
-            }
-        };
+        fab.hide();
     }
 
     @Override

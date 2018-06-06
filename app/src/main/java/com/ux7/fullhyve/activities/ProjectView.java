@@ -21,6 +21,7 @@ import com.ux7.fullhyve.data.ListProject;
 import com.ux7.fullhyve.fragments.AnnouncementsFragment;
 import com.ux7.fullhyve.fragments.MemberFragment;
 import com.ux7.fullhyve.fragments.ProjectDetailFragment;
+import com.ux7.fullhyve.fragments.TaskSetFragment;
 import com.ux7.fullhyve.util.ActionBarTarget;
 import com.ux7.fullhyve.util.CircleTransform;
 import com.ux7.fullhyve.util.ThumbnailTransform;
@@ -166,8 +167,8 @@ public class ProjectView extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    AnnouncementsFragment projectAnnounce = new AnnouncementsFragment();
-                    return projectAnnounce;
+                    TaskSetFragment taskSetFragment = new TaskSetFragment();
+                    return taskSetFragment;
                 case 1:
                     MemberFragment projectMembers = new MemberFragment();
                     return projectMembers;

@@ -48,18 +48,20 @@ public class AnnouncementRecyclerViewAdapter extends RecyclerView.Adapter<Announ
 
         holder.mAnnouncement = mAnnouncements.get(position);
         holder.mAnnouncementContent.setText(holder.mAnnouncement.message);
-        holder.mAnnouncementTime.setText(holder.mAnnouncement.sentTime);
+        holder.mAnnouncementTime.setText(holder.mAnnouncement.sentTime + "   " + holder.mAnnouncement.replies + " replies");
         holder.mAnnouncerName.setText(holder.mAnnouncement.senderName);
         Picasso.with(holder.mView.getContext())
                 .load(holder.mAnnouncement.senderImage)
                 .transform(new CircleTransform())
                 .into(holder.mAnnouncerImage);
 
+        Context context = holder.mView.getContext();
+
         if (holder.mAnnouncement.sent) {
             ((ImageView)holder.mView.findViewById(R.id.callout_spike_receive)).setVisibility(View.GONE);
             ((ImageView)holder.mView.findViewById(R.id.announcer_image)).setVisibility(View.GONE);
             ((ImageView)holder.mView.findViewById(R.id.callout_spike_send)).setVisibility(View.VISIBLE);
-            ((View)holder.mView.findViewById(R.id.callout_body)).setBackgroundColor(holder.mView.getResources().getColor(R.color.messageSent));
+            ((View)holder.mView.findViewById(R.id.callout_body)).setBackground(context.getResources().getDrawable(R.drawable.ripple_effect_sent));
             holder.mAnnouncementContent.setTextColor(holder.mView.getResources().getColor(R.color.textLight));
             holder.mView.findViewById(R.id.messages_loading_spinner).setVisibility(View.GONE);
         }

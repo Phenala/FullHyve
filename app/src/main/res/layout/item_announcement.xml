@@ -30,10 +30,10 @@
 
             <ImageView
                 android:id="@+id/announcer_image"
-                android:layout_width="39dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="0"
-                app:srcCompat="@mipmap/user_picture" />
+                android:background="@mipmap/user_picture_round" />
 
             <ImageView
                 android:id="@+id/callout_spike_receive"
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/messageReceived"
+                android:background="@drawable/ripple_effect_received"
                 android:orientation="vertical"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="8dp">
