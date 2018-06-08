@@ -51,7 +51,7 @@
             android:id="@+id/teamFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.ux7.fullhyve.activities.TeamView"
+            tools:context=".ui.activities.TeamView"
             tools:layout_editor_absoluteY="197dp">
 
         </android.support.v4.view.ViewPager>

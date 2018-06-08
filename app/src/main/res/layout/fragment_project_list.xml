@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.ux7.fullhyve.fragments.ProjectsListFragment"
+    tools:context=".ui.fragments.ProjectsListFragment"
     tools:listitem="@layout/item_project">
 
 </android.support.v7.widget.RecyclerView>

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.HomeView"
+            android:name=".ui.activities.HomeView"
             android:label="@string/title_activity_home_view"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,16 +21,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ContactView" />
+        <activity android:name=".ui.activities.ContactView" />
         <activity
-            android:name=".activities.TeamView"
+            android:name=".ui.activities.TeamView"
             android:label="@string/title_activity_team_view" />
-        <activity android:name=".activities.ProjectView" />
-        <activity android:name=".activities.NewTeam" />
-        <activity android:name=".activities.NewProject" />
-        <activity android:name=".activities.AnnouncementView" />
-        <activity android:name=".activities.UserView" />
-        <activity android:name=".activities.AddMember"></activity>
+        <activity android:name=".ui.activities.ProjectView" />
+        <activity android:name=".ui.activities.NewTeam" />
+        <activity android:name=".ui.activities.NewProject" />
+        <activity android:name=".ui.activities.AnnouncementView" />
+        <activity android:name=".ui.activities.UserView" />
+        <activity android:name=".ui.activities.AddMember" />
+        <activity android:name=".ui.activities.TaskSetView" />
+        <activity android:name=".ui.activities.TaskView" />
+        <activity android:name=".ui.activities.NewTaskSetView" />
+        <activity android:name=".ui.activities.NewTaskView"></activity>
     </application>
 
 </manifest>
