@@ -144,6 +144,12 @@ public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<MessagesRe
 
     }
 
+    public void update() {
+
+        notifyDataSetChanged();
+
+    }
+
     public interface OnMessageRecyclerInteractionListener {
 
         void onForwardMessage(View view, ListMessage message);

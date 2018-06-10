@@ -1,15 +1,15 @@
 package com.ux7.fullhyve.ui.activities;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -21,19 +21,20 @@ import com.ux7.fullhyve.R;
 import com.ux7.fullhyve.ui.adapters.MessagesRecyclerViewAdapter;
 import com.ux7.fullhyve.ui.data.ListContact;
 import com.ux7.fullhyve.ui.data.ListMessage;
-import com.ux7.fullhyve.ui.interfaces.OnAdapterInteractionListener;
+import com.ux7.fullhyve.ui.interfaces.ResponseListener;
 import com.ux7.fullhyve.ui.util.ActionBarTarget;
 import com.ux7.fullhyve.ui.util.CircleTransform;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.List;
 
 public class ContactView extends AppCompatActivity implements MessagesRecyclerViewAdapter.OnMessageRecyclerInteractionListener {
 
     ListContact contact = new ListContact();
+    List<ListMessage> messages = new ArrayList<>();
     boolean editing = false;
     String messageEditingId = "";
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +54,40 @@ public class ContactView extends AppCompatActivity implements MessagesRecyclerVi
 
     public void buildMessages() {
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.messages_view);
+        recyclerView = (RecyclerView) findViewById(R.id.messages_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<ListMessage> nlist = new ArrayList<>();
-        //nlist.add(ListMessage.getSpinnerValue());
-        for (int i = 0; i < 20; i++) {
-            ListMessage l = new ListMessage();
-            l.sent = Math.random() > 0.5;
-            nlist.add(l);
-        }
-        recyclerView.setAdapter(new MessagesRecyclerViewAdapter(nlist, this));
+        (new GetMessagesTask()).execute();
+
+        recyclerView.setAdapter(new MessagesRecyclerViewAdapter(messages, this));
         recyclerView.getLayoutManager().scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+    }
+
+
+    public void getMessages() {
+
+        final MessagesRecyclerViewAdapter messagesRecyclerViewAdapter = (MessagesRecyclerViewAdapter)recyclerView.getAdapter();
+
+        ResponseListener listener = new ResponseListener() {
+            @Override
+            public void call(final Object... args) {
+//                Handler handler = new Handler(Looper.getMainLooper());
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//
+//
+//                    }
+//                });
+
+
+
+
+            }
+        };
+
+
     }
 
     public void buildActionBar() {
@@ -164,6 +187,39 @@ public class ContactView extends AppCompatActivity implements MessagesRecyclerVi
                 }).show();
 
     }
+
+
+
+    class GetMessagesTask extends AsyncTask<String, Integer, List<ListMessage>>
+    {
+
+        @Override
+        protected List<ListMessage> doInBackground(String... strings) {
+
+            //getMessageHandler
+
+            ArrayList<ListMessage> nlist = new ArrayList<>();
+            //nlist.add(ListMessage.getSpinnerValue());
+            for (int i = 0; i < 2; i++) {
+                ListMessage l = new ListMessage();
+                l.sent = Math.random() > 0.5;
+                nlist.add(l);
+            }
+
+            messages.addAll(nlist);
+
+            return nlist;
+
+        }
+
+        @Override
+        protected void onPostExecute(List<ListMessage> result) {
+
+            ((MessagesRecyclerViewAdapter)recyclerView.getAdapter()).update();
+
+        }
+    };
+
 
 
     public void enterMessage(View view) {
