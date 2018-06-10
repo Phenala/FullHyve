@@ -20,6 +20,8 @@ public interface OnHomeInteractionListener {
 
     void onProjectListFragmentInteraction(ListProject project);
 
+    void  onNotificationFragmentInteraction(ListProject project);
+
     void onStartNewActivity(Intent intent);
 
     Context getHomeContext();

@@ -22,8 +22,6 @@ public class NewTaskView extends AppCompatActivity {
 
     }
 
-
-
     public void buildActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("New Task Set");

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.ux7.fullhyve.ui.data.UserDetail;
 import com.ux7.fullhyve.ui.fragments.MemberFragment.OnListFragmentInteractionListener;
 import com.ux7.fullhyve.ui.util.CircleTransform;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,9 +30,11 @@ import java.util.List;
 public class AddMemberRecyclerViewAdapter extends RecyclerView.Adapter<AddMemberRecyclerViewAdapter.ViewHolder> {
 
     private final List<ListMember> mMembers;
+    public final List<String> mSelectedUsers;
 
     public AddMemberRecyclerViewAdapter(List<ListMember> items) {
         mMembers = items;
+        mSelectedUsers = new ArrayList<>();
     }
 
     @Override
@@ -69,6 +73,21 @@ public class AddMemberRecyclerViewAdapter extends RecyclerView.Adapter<AddMember
             }
 
         });
+
+        holder.mAddMember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (b)
+
+                    mSelectedUsers.add(holder.mMember.id);
+
+                else
+
+                    mSelectedUsers.remove(holder.mMember.id);
+
+            }
+        });
     }
 
     @Override
@@ -96,4 +115,12 @@ public class AddMemberRecyclerViewAdapter extends RecyclerView.Adapter<AddMember
             return super.toString() + " '" + mMemberNameView.getText() + "'";
         }
     }
+
+    public String[] getSelectedUserIds() {
+
+        return mSelectedUsers.toArray(new String[]{});
+
+    }
+
+
 }

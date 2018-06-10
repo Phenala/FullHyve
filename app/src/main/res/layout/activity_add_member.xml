@@ -28,6 +28,7 @@
             android:layout_weight="0"
             android:background="@drawable/ripple_effect_accent"
             android:text="Invite"
+            android:onClick="addUsers"
             android:textColor="@color/colorPrimary" />
 
     </LinearLayout>

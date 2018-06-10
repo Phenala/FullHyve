@@ -1,28 +1,39 @@
 package com.ux7.fullhyve.ui.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.ux7.fullhyve.R;
 import com.ux7.fullhyve.ui.adapters.MessagesRecyclerViewAdapter;
 import com.ux7.fullhyve.ui.data.ListContact;
 import com.ux7.fullhyve.ui.data.ListMessage;
+import com.ux7.fullhyve.ui.interfaces.OnAdapterInteractionListener;
 import com.ux7.fullhyve.ui.util.ActionBarTarget;
 import com.ux7.fullhyve.ui.util.CircleTransform;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ContactView extends AppCompatActivity {
+public class ContactView extends AppCompatActivity implements MessagesRecyclerViewAdapter.OnMessageRecyclerInteractionListener {
 
     ListContact contact = new ListContact();
+    boolean editing = false;
+    String messageEditingId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +43,6 @@ public class ContactView extends AppCompatActivity {
         buildContact();
         buildActionBar();
         buildMessages();
-
 
     }
 
@@ -53,16 +63,8 @@ public class ContactView extends AppCompatActivity {
             l.sent = Math.random() > 0.5;
             nlist.add(l);
         }
-
-        recyclerView.setAdapter(new MessagesRecyclerViewAdapter(nlist));
+        recyclerView.setAdapter(new MessagesRecyclerViewAdapter(nlist, this));
         recyclerView.getLayoutManager().scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_view, menu);
-        return true;
     }
 
     public void buildActionBar() {
@@ -76,12 +78,6 @@ public class ContactView extends AppCompatActivity {
                 .load(contact.image)
                 .transform(new CircleTransform())
                 .into(new ActionBarTarget(getResources(), actionBar));
-    }
-
-    public void sendMessage(View view) {
-        String message = ((EditText)findViewById(R.id.messageToSend)).getText().toString();
-
-        //messageSendLogic
     }
 
     @Override
@@ -101,5 +97,111 @@ public class ContactView extends AppCompatActivity {
 
     public void goBack() {
         finish();
+    }
+
+    @Override
+    public void onForwardMessage(View view, ListMessage message) {
+
+        Intent intent = new Intent(this, AddMember.class);
+        intent.putExtra("type", AddMember.AddUserType.FORWARD);
+        startActivityForResult(intent, 11);
+
+    }
+
+    @Override
+    public void onEditMessage(View view, ListMessage message) {
+
+        EditText messageEditor = ((EditText)findViewById(R.id.messageToSend));
+
+        messageEditor.setText(message.message);
+        messageEditingId = message.id;
+        setMessageEditMode(true);
+
+    }
+
+    public void setMessageEditMode(boolean state) {
+
+        editing = state;
+        ImageButton button = ((ImageButton)findViewById(R.id.messageSendButton));
+
+        if (state) {
+            button.setImageResource(R.drawable.ic_tick_icon);
+        } else {
+            button.setImageResource(R.drawable.ic_send_icon);
+        }
+
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data)  {
+
+        if (resultCode == RESULT_OK && requestCode == 11) {
+
+            Toast.makeText(this, data.getStringArrayExtra("users").length + "", Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+    @Override
+    public void onDeleteMessage(View view, final ListMessage message) {
+
+        AlertDialog.Builder confirmation = new AlertDialog.Builder(this);
+        confirmation.setMessage("Are you sure you want to delete this message?")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        deleteMessage(message.id);
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).show();
+
+    }
+
+
+    public void enterMessage(View view) {
+
+        if (editing) {
+            editMessage();
+            setMessageEditMode(false);
+        } else {
+            sendMessage();
+        }
+
+        ((EditText)findViewById(R.id.messageToSend)).setText("");
+
+    }
+
+
+    public void sendMessage() {
+        String message = ((EditText)findViewById(R.id.messageToSend)).getText().toString();
+
+        //messageSendLogic
+    }
+
+    public void deleteMessage(String messageId) {
+
+        //messageDeleteLogic
+
+    }
+
+    public void editMessage() {
+        String message = ((EditText)findViewById(R.id.messageToSend)).getText().toString();
+
+        //messageEditLogic
+
+    }
+
+    public void forwardMessage(String message, String[] receiverIds) {
+
+        //messageForwardLogic
+
     }
 }

@@ -1,10 +1,12 @@
 package com.ux7.fullhyve.ui.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +25,7 @@ import com.ux7.fullhyve.ui.data.ListContact;
 import com.ux7.fullhyve.ui.data.ListProject;
 import com.ux7.fullhyve.ui.data.ListTeam;
 import com.ux7.fullhyve.ui.fragments.ContactsListFragment;
+import com.ux7.fullhyve.ui.fragments.NotificationFragment;
 import com.ux7.fullhyve.ui.fragments.ProjectsListFragment;
 import com.ux7.fullhyve.ui.fragments.TeamsListFragment;
 import com.ux7.fullhyve.ui.interfaces.OnHomeInteractionListener;
@@ -33,6 +36,7 @@ public class HomeView extends AppCompatActivity
     ContactsListFragment contactsListFragment = new ContactsListFragment();
     TeamsListFragment teamsListFragment = new TeamsListFragment();
     ProjectsListFragment projectsListFragment = new ProjectsListFragment();
+    NotificationFragment notificationFragment = new NotificationFragment();
 
     FloatingActionButton fab;
     View.OnClickListener addTeam;
@@ -121,10 +125,11 @@ public class HomeView extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Toast.makeText(this, "Navigated", Toast.LENGTH_SHORT).show();
 
         if (id == R.id.nav_notifications) {
             setTitle("Notifications");
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, notificationFragment).commit();
+            fab.hide();
         } else if (id == R.id.nav_chat) {
             setTitle("Chat");
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contactsListFragment).commit();
@@ -140,6 +145,8 @@ public class HomeView extends AppCompatActivity
             fab.show();
             fab.setOnClickListener(addProject);
         } else if (id == R.id.nav_log_out) {
+
+            logoutConfirmation();
 
         }
 
@@ -162,6 +169,27 @@ public class HomeView extends AppCompatActivity
         fab.hide();
     }
 
+
+    public void logoutConfirmation() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("Are you sure you want to log out?")
+                .setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        logout();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .show();
+
+    }
+
     @Override
     public void onContactListFragmentInteraction(ListContact item) {
 
@@ -178,6 +206,11 @@ public class HomeView extends AppCompatActivity
     }
 
     @Override
+    public void onNotificationFragmentInteraction(ListProject project) {
+
+    }
+
+    @Override
     public void onStartNewActivity(Intent intent) {
         startActivity(intent);
     }
@@ -185,6 +218,15 @@ public class HomeView extends AppCompatActivity
     @Override
     public Context getHomeContext() {
         return this;
+    }
+
+
+
+
+    public void logout() {
+
+        //logoutLogic
+
     }
 
 
